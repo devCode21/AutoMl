@@ -64,10 +64,10 @@ def get_metrics_of_all_model():
 def download_metrics():
     if (not os.path.exists("artifacts/reports/report_download.json")):
          return "model doesnt exist ",404
-    with open('artifacts/reports/report_download','r') as f:
+    with open('artifacts/reports/report_download.json','r') as f:
         model_report=json.load(f)
     
-    return send_file("artifacts/reports/download_reprt.josn",as_attachment=True , download_name='report.json'),200
+    return send_file("artifacts/reports/report_download.json",as_attachment=True , download_name='report.json'),200
 
 # api for intermediate results 
 @app.route('/ongoing_results', methods=["GET"])
@@ -100,21 +100,25 @@ def get_transformed_trained_dataset():
 
 
 # to testing of test csv data 
-@app.route('/download_the_predicts_file', methods=["GET"])
-async def download_pred_file():
+@app.route('/download_the_predicts_file', methods=["POST"])
+def download_pred_file():
     data=request.files['file']
     data.save(data.filename)
-    
-    await Test_model_pipline().run_test_pipeline(data ,'')
-    
-
+    Test_model_pipline().run_test_pipeline(data.filename ,'classifier')
     if (not os.path.exists("artifacts/pred/predicted_data.csv")):
         return "file was not found" ,404
     
     path="artifacts/pred/predicted_data.csv"
     return send_file(path, as_attachment=True ,download_name='pred.csv'),200
 
+
+@app.route('/download_pred_file', methods=["GET"])
+def download_files():
+    if (not os.path.exists("artifacts/pred/predicted_data.csv")):
+        return "file was not found" ,404
     
+    path="artifacts/pred/predicted_data.csv"
+    return send_file(path, as_attachment=True ,download_name='pred.csv'),200  
 
 
 if __name__=="__main__":

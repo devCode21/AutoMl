@@ -75,7 +75,10 @@ class Test_model_pipline:
     
     def csv_data_test_model_pipline(self , csv_data):
        try:
+         logging.info(csv_data)
          data=pd.read_csv(csv_data)
+         
+   
          features_req=list(self.preprocess["features_before_transfromation"].keys())
         
          
