@@ -6,10 +6,10 @@ from src.components.model import Model
 from src.components.dataIngestion import DataIngestion
 from src.components.dataTranformation import X_trainTransform
 
-data='StressLevelDataset.csv'
+data='mushrooms.csv'
 
 if __name__=='__main__':
     DataIngestion().store_data(data)
-    X_trainTransform().run_DataTransformation(data,"stress_level" )
+    X_trainTransform().run_DataTransformation(data,"class" )
 
     Model().run_Model('')

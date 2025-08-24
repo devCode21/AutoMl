@@ -95,7 +95,7 @@ class Model:
                report_to_send_frontend[model_key ]=clf
                report[model_key]=accuracy 
              
-          with open('artifacts/reports/report_download', 'w') as file:
+          with open('artifacts/reports/report_download.json', 'w') as file:
               json.dump(report_to_send_frontend, file)
           
           with open(self.config.report, 'w') as file:
@@ -129,7 +129,7 @@ class Model:
                report_to_send_frontend[model_key]=clf
                report[model_key]=r2_value
            
-          with open("artifacts/reports/report_download", 'w') as file:
+          with open("artifacts/reports/report_download.json", 'w') as file:
               json.dump(report_to_send_frontend, file)
           ongoing_add("Training regression models completed")
 
@@ -169,8 +169,11 @@ class Model:
             extract_features_form_data(prprocess ,best_model)
           
           
-
-         logging.info(metrics)  
+    
+         logging.info(metrics) 
+   
+         
+         
          with open(self.config.hypertuned_model_report, 'w') as file:
               json.dump(metrics, file)
           
