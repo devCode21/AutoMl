@@ -33,8 +33,9 @@ def appy_preprocess_techniques(X_test):
               
         logging.info(f"Transformed test data shape: {X_test_transformed.shape}")
         np.save('x_test',X_test_transformed[preprocess['feature_name']]) 
+
         X_test_transformed[preprocess['feature_name']].to_csv("transformed_test.csv", index=False)
-        return X_test_transformed
+        return X_test_transformed[preprocess['feature_name']]
       except Exception as e:
              raise CustomException(e,sys)
 
@@ -64,7 +65,7 @@ class Test_model_pipline:
         X_predict_data_transformed=appy_preprocess_techniques(X_predict_data )
         y_pred=self.model.predict(X_predict_data_transformed)
         preprocess=joblib.load('artifacts/preprocss.pkl')
-        if(preprocess.get('en')):
+        if(preprocess.get('le')):
              y_pred= preprocess['le'].inverse_transform(y_pred)
         
         logging.info(y_pred)
@@ -80,7 +81,7 @@ class Test_model_pipline:
          
    
          features_req=list(self.preprocess["features_before_transfromation"].keys())
-        
+         logging.info(f'features_list {features_req}')
          
          if set(features_req).issubset(set(data.columns)):
                   data[features_req]
@@ -91,13 +92,15 @@ class Test_model_pipline:
                               feature_not_in.append(i)
                   logging.info(feature_not_in)
                   return 1
-                  
+                 
          X_predict_data_transformed=appy_preprocess_techniques(data)
-         logging.info(type(X_predict_data_transformed),X_predict_data_transformed , X_predict_data_transformed.shape)
+         logging.info(self.preprocess)
+         logging.info(f'{type(X_predict_data_transformed)},{X_predict_data_transformed },{X_predict_data_transformed.shape}')
          if(self.preprocess.get('le')):
+               logging.info('came here')
                data['TARGET']= self.preprocess['le'].inverse_transform(self.model.predict(X_predict_data_transformed))
-         
-         data['TARGET']=self.model.predict(X_predict_data_transformed)
+         else:
+          data['TARGET']=self.model.predict(X_predict_data_transformed)
         #  store final results
          data.to_csv(os.path.join(self.config.artifacts ,'pred' ,'predicted_data.csv'),index=False)
 

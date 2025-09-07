@@ -31,9 +31,19 @@ class ModelConfig:
 
 
 
-def extract_features_form_data(preprocess ,best_model):
+def extract_features_form_data(preprocess ,best_model, best_model_name):
       try: 
-         features=best_model.feature_importances_
+         if best_model_name!="SLR" and best_model_name!="LogisticRegression":
+          features=best_model.feature_importances_
+         else:
+              if best_model_name=='SLR':
+                  features=best_model.coef_
+              else:
+                  features= np.mean(np.abs(best_model.coef_), axis=0)
+           
+              logging.info(features)
+              logging.info(f'{len(features)} , {len(preprocess["feature_name"])}')
+         
          features_names={}
          
          features_mean=preprocess['features_before_transfromation']
@@ -51,6 +61,7 @@ def extract_features_form_data(preprocess ,best_model):
          np.save("artifacts/features.npy" ,{"form_features":form_feature , "values_of_feature_not_in_form":values_of_feature_not_in_form})
       except Exception as e:
            raise CustomException(e,sys)
+      
 #choose d/f models right on the basis or type of data we would acctualllu use the models 
 # train the all model or selected models ok /tune bet model using hyperparamenter
 # will provide best model for download
@@ -122,7 +133,7 @@ class Model:
                r2_value=r2_score(self.Y_test,y_pred)
                mae=mean_absolute_percentage_error(self.Y_test,y_pred)
                clf={
-                    "MAE":mean_absolute_error,
+                     "MAE":mae,
                      "varaince_explained":r2_value,
                      "MSe":mean_squared_error(self.Y_test ,y_pred )
                }
@@ -130,14 +141,13 @@ class Model:
                report[model_key]=r2_value
            
           with open("artifacts/reports/report_download.json", 'w') as file:
-              json.dump(report_to_send_frontend, file)
+               json.dump(report_to_send_frontend, file)
           ongoing_add("Training regression models completed")
 
           with open(self.config.report, 'w') as file:
               json.dump(report, file)
+          
           ongoing_add("Training regression models completed")
-
-
           return report
         except Exception as e:
               raise CustomException(e,sys)
@@ -149,6 +159,7 @@ class Model:
          ongoing_add("Hyperparameter tuning started")
          logging.info("Hyperparameter tuning for the best model...")
          model =max(report ,key=report.get)
+         best_model_name=model
          logging.info(f"Best model: {model} with score: {report[model]}")
          tune_model=model_type[model]
          tuned_model=GridSearchCV(estimator=tune_model , param_grid=param_gird[model] ,verbose=3)
@@ -165,8 +176,9 @@ class Model:
          joblib.dump(best_model ,os.path.join(self.config.artifacts , "model",self.config.model_path))
         
          prprocess=joblib.load(self.config.preprocess )
-         if model!="SLR" and model!="LogisticRegression":
-            extract_features_form_data(prprocess ,best_model)
+       
+         extract_features_form_data(prprocess ,best_model,best_model_name)
+
           
           
     

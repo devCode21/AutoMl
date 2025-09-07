@@ -1,3 +1,5 @@
+
+
 # featuring engineering => remove all nULl values or handle missing values based on mean mdedian mode 
 # train test split 
 # if nULl value is less than 1% X_train remove it or if feture has nULl value more tha 30-40% remove it 
@@ -5,6 +7,8 @@
 # then check mULi collinesrt the select 
 # then on the basis of collreation choose only top 20% of components then go on wit X_train transformation for standardisatio and one hot encoduing 
 # the save the self.preprocess file with important features and even piplinse then save the file in format of npy for fast response and csv to send user 
+
+
 from src.constant.lib_constant import SimpleImputer ,sys,train_test_split ,Pipeline,PipLine2,dataclass,pd,np,logging,ongoing_add,os,LabelEncoder
 from src.constant.lib_constant import joblib,StandardScaler,SMOTE,RandomUnderSampler,variance_inflation_factor ,CustomException,OneHotEncoder
 
@@ -169,7 +173,7 @@ class X_trainTransform:
                     vif["feature"] = X_scaled.columns
                     vif["VIF"] = [variance_inflation_factor(X_scaled[:10000].values, i) for i in range(X_scaled.shape[1])]
                     print(vif.sort_values(by="VIF", ascending=False))
-                    vif_filtered = vif.loc[vif["VIF"] > 10, "feature"]
+                    vif_filtered = vif.loc[vif["VIF"] > 30, "feature"]
                     if len(vif_filtered) > 0:
         
                         features_to_drop = vif.loc[vif["feature"].isin(vif_filtered)].sort_values("VIF", ascending=False)
@@ -214,7 +218,7 @@ class X_trainTransform:
               features_mean_value[col]=self.X_train[col].mean() 
             
 
-        self.preprocess={
+        preprocess1={
                "features_before_transfromation":features_mean_value,
                "numeric_pipline":num_pipeline,
                "categorical_Pipeline":cat_Pipeline,
@@ -226,6 +230,7 @@ class X_trainTransform:
                'numericals_cols_before_vif':numericals_cols_before_vif,
                "features":features
            }
+        self.preprocess=self.preprocess|preprocess1
 
         ongoing_add("Sampling started")
         Sampling=PipLine2([

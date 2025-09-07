@@ -27,7 +27,7 @@ function Csv_test() {
   }
   return (
   <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-50 to-gray-100">
-  <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-gray-100">
+  <div className="bg-black p-8 rounded-3xl shadow-xl w-full max-w-md border border-gray-100">
     
     <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
       Upload Your CSV
@@ -60,3 +60,4 @@ function Csv_test() {
 }
 
 export default Csv_test
+

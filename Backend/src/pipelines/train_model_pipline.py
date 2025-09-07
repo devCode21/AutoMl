@@ -5,7 +5,7 @@ from src.components.model import Model
 from dataclasses import dataclass
 
 
-
+data='abalone.csv'
 
 
 class Train_model_pipline:

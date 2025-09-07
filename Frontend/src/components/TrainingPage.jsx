@@ -109,7 +109,7 @@ function TrainingPage() {
                 Select type
               </option>
               <option value="classification">Classification</option>
-              <option value="regression">Regression</option>
+              <option value="Regressor">Regressor</option>
             </select>
           </div>
 

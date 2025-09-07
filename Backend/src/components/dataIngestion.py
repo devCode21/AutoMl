@@ -36,3 +36,7 @@ class DataIngestion():
          raise CustomException(e,sys)
     
 # working fine 
+
+
+# issue to solve first clean code , drop unwanted cols form the user , automateing classfication and Rgeressor 
+# 

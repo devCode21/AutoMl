@@ -9,10 +9,10 @@ from xgboost import XGBClassifier ,XGBRFRegressor
 
 
 param_grid_all_Regressor = {
-    # 'SLR': {
-    #     'fit_intercept': [True, False],
-    #     # 'normalize' deprecated, usually not used anymore
-    # },
+    'SLR': {
+        'fit_intercept': [True, False],
+        # 'normalize' deprecated, usually not used anymore
+    },
     'Decision_Tree': {
         'max_depth': [None, 5, 10, 20],
         'min_samples_split': [2, 5, 10],
@@ -93,7 +93,7 @@ param_grid_all_classification = {
 
 
 modelRegressor={
-    # 'SLR':LinearRegression(),
+    'SLR':LinearRegression(),
     'Decision_Tree':DecisionTreeRegressor(),
     'RandomForest':RandomForestRegressor(),
     'GradientBoosting':GradientBoostingRegressor(),
@@ -102,7 +102,7 @@ modelRegressor={
 
 
 modelClassifier={
-    # 'LogisticRegression':LogisticRegression(), 
+    'LogisticRegression':LogisticRegression(), 
     'Decision_Tree':DecisionTreeClassifier(),
     'RandomForest':RandomForestClassifier(),
     'GradientBoosting':GradientBoostingClassifier(),
