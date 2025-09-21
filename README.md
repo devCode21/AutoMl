@@ -74,9 +74,23 @@ In upcoming versions, support for **Unsupervised Learning** and **Neural Network
 
 
 
-## 📸 Screenshots (Optional)
+## 📸 Screenshots 
 
-*Add screenshots of your frontend UI here (Home, Training, Reports, Prediction pages).*
+<img width="1862" height="928" alt="Screenshot 2025-09-21 234221" src="https://github.com/user-attachments/assets/9faa56d8-f334-41a0-853d-9f64aa97f837" />
+<img width="1419" height="791" alt="Screenshot 2025-09-21 234347" src="https://github.com/user-attachments/assets/77c10abe-a132-41d4-8d32-35445ca51cb5" />
+<img width="774" height="788" alt="Screenshot 2025-09-21 234611" src="https://github.com/user-attachments/assets/c97a63dc-f9d4-4d59-86fa-9c1097dd0bc2" />
+<img width="1175" height="812" alt="Screenshot 2025-09-21 234209" src="https://github.com/user-attachments/assets/2f2f9c19-81cb-4794-a9c6-7ce9776e7e3e" />
+<img width="1885" height="839" alt="Screenshot 2025-09-21 234556" src="https://github.com/user-attachments/assets/0aae3dc0-9531-4ee2-b58d-6e22c43df7fd" />
+<img width="774" height="788" alt="Screenshot 2025-09-21 234611" src="https://github.com/user-attachments/assets/39411141-233b-4ae8-9dbf-c8a807e6664c" />
+<img width="1075" height="867" alt="Screenshot 2025-09-21 234544" src="https://github.com/user-attachments/assets/077ed3bd-1dab-4467-be9d-a917cb4e5c73" />
+
+
+
+
+
+
+
+
 
 ---
 
