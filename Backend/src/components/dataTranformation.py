@@ -8,7 +8,7 @@
 # then on the basis of collreation choose only top 20% of components then go on wit X_train transformation for standardisatio and one hot encoduing 
 # the save the self.preprocess file with important features and even piplinse then save the file in format of npy for fast response and csv to send user 
 
-
+# make the code cleaner 
 from src.constant.lib_constant import SimpleImputer ,sys,train_test_split ,Pipeline,PipLine2,dataclass,pd,np,logging,ongoing_add,os,LabelEncoder
 from src.constant.lib_constant import joblib,StandardScaler,SMOTE,RandomUnderSampler,variance_inflation_factor ,CustomException,OneHotEncoder
 

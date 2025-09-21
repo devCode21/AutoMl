@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router";
 import Report from "./report";
@@ -7,46 +7,65 @@ async function call_api(data,targetCol ,typeOfModel){
   
     const formData = new FormData();
     formData.append('file', data)
-    let result=await axios.post(`http://127.0.0.1:5000/Predict_csv_file/${targetCol}/${typeOfModel}`,formData,{
+    let result=await axios.post(`http://localhost:5000/Data/${targetCol}/${typeOfModel}`,formData,{
         headers: {
           'Content-Type': 'multipart/form-data',
-        }})
+        },
+        withCredentials:true,
+      
+      },)
+ 
+    
     return result
 }
 
 function TrainingPage() {
-  const [chnage ,setchange]=useState(0)
+  localStorage.clear()
+   let [data1 , setData1]=useState([])
   const [dataset, setDataset] = useState(null);
   const [targetCol, setTargetCol] = useState("");
   const [typeOfModel, setTypeOfModel] = useState("");
-  const [api ,setapi]=useState("0")
+ 
 
   const nav=useNavigate()
-
+  const [submit , setsubmit]=useState(0)
+ 
   useEffect(()=>{
        let api1=async()=>{
             if(dataset || targetCol!="" ||typeOfModel!=""){
             let val=await call_api(dataset,targetCol,typeOfModel)
             if(val.status==200){
-              setapi(1)
-              console.log(api)
+              
+              let a= Object.values(val.data)
+              setData1(a)
+          
+
             }
-       }
+          
+        }
        }
        api1()
        
-  },[chnage])
-  
+  },[submit])
+  useEffect(()=>{
+    
+       if(data1.length>0){
+                  console.log(JSON.stringify(data1))
+                  localStorage.setItem("columns" ,(JSON.stringify(data1)))
+                   nav('/remove_cols_doeent_req')
+                 
+                  
+            }
+  },[setData1 , data1])
   const handleSubmit= (e)=>{
     e.preventDefault()
     if(!dataset || targetCol=="" ||typeOfModel==""){
       console.log("enter all details")
       return
     }
-   
+    setsubmit(!submit)
   
-    setchange(1)
-    console.log(typeOfModel)
+    
    
    
     
@@ -54,10 +73,12 @@ function TrainingPage() {
     
   }
 
+ 
+
 
   return (
     <>
-         {chnage===0?<div  className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-white to-gray-200 p-6">
+      <div  className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-100 via-white to-gray-200 p-6">
       <div className="w-full max-w-lg bg-white rounded-2xl shadow-xl border border-gray-200 p-8">
         <h1 className="text-2xl font-bold text-gray-800 text-center mb-6">
           Train Your Dataset
@@ -117,14 +138,14 @@ function TrainingPage() {
           <div className="flex justify-center">
             <button
               type="submit"
-              className="w-full bg-indigo-500 hover:bg-indigo-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200"
+              className="w-full bg-green-500 hover:bg-yellow-600 text-white font-medium py-2 px-4 rounded-lg shadow-md transition duration-200"
             >
               Train the Dataset
             </button>
           </div>
         </form>
       </div>
-    </div>:<>{<Report api={api}/>}</>}
+    </div> 
     </>
    
   );

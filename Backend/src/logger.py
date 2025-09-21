@@ -25,3 +25,13 @@ logging.basicConfig(
 
 
 
+# frontend se column feature add karwan jo unneccesaar hai like id date etc wagera 
+# =>flipping base model 
+# => data set => pass the data set to backend => the using state management => i can access the dat and cols to remove and integrate to flip based model again ?? 
+
+# to make visisble all row now 
+#  create a object using use sate then 
+# inside usestae =>selct the teh slected value and send =>>..
+
+
+# backend more simpler codes rather than complex so that it can be understable and faster 

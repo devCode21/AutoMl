@@ -7,23 +7,49 @@ from src.pipelines.test_model_pipeline import Test_model_pipline
 import json
 import numpy as np
 import joblib
+import pandas as pd 
 from flask_cors import CORS
-
+from flask import session
+from src.logger import logging
 app=Flask(__name__)
-CORS(app)
+app.secret_key = 'supersecret123'  # Add a secret key for session management
+CORS(app , supports_credentials=True , origins=["http://localhost:5173"] ) #))
 
 
 # training -api
-@app.route('/Predict_csv_file/<TARGETCOL>/<MODEL_TYPE>', methods=["POST"])
-def Predict_csv_file(TARGETCOL,MODEL_TYPE):
+
+
+@app.route('/Predict_csv_file', methods=['POST'])
+def Predict_csv_file():
+    TARGET_COL1 = session.get('target_col')
+    MODEL_TYPE1 = session.get('model_type')
+    File_Name = session.get('file_name')
+    Col = request.get_json().get('columns')
+   
+    print("Session after /Data:", dict(session))
+    logging.info(f"target column is {TARGET_COL1}, model type is {MODEL_TYPE1}, file name is {File_Name}")
     
-    data=request.files['file']  # convert bytes to string
+    Train_model_pipline().runTrain_piline(File_Name, TARGET_COL1, Col, MODEL_TYPE1)
+    return "Trained Successfully", 200
+
+
+@app.route('/Data/<TARGETCOL>/<MODEL_TYPE>', methods=["POST"])
+def get_cols(TARGETCOL, MODEL_TYPE):
+    data = request.files['file']
     data.save(data.filename)
-    print(MODEL_TYPE)
-    Train_model_pipline().runTrain_piline(data.filename ,TARGETCOL,"",MODEL_TYPE)
-    return "Trained Succesfully",200
-    
-    
+
+    session['target_col'] = TARGETCOL
+    session['model_type'] = MODEL_TYPE
+    session['file_name'] = data.filename
+    print("Session after /Data:", dict(session))
+    df = pd.read_csv(data.filename)
+    if TARGETCOL not in df.columns:
+        return "target column not found", 404
+
+    df = df.drop(TARGETCOL, axis=1)   # drop properly
+    return jsonify(list(df.columns)), 200
+
+
 
 # important features 
 @app.route('/send_form_features', methods=["GET"])
@@ -104,12 +130,12 @@ def get_transformed_trained_dataset():
 def download_pred_file():
     data=request.files['file']
     data.save(data.filename)
-    Test_model_pipline().run_test_pipeline(data.filename ,'classifier')
+    Test_model_pipline().run_test_pipeline(data.filename ,'Regressor')
     if (not os.path.exists("artifacts/pred/predicted_data.csv")):
         return "file was not found" ,404
     
     path="artifacts/pred/predicted_data.csv"
-    return send_file(path, as_attachment=True ,download_name='pred.csv'),200
+    return 'Success', 200
 
 
 @app.route('/download_pred_file', methods=["GET"])
@@ -119,6 +145,9 @@ def download_files():
     
     path="artifacts/pred/predicted_data.csv"
     return send_file(path, as_attachment=True ,download_name='pred.csv'),200  
+
+
+
 
 
 if __name__=="__main__":

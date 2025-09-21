@@ -98,6 +98,7 @@ class Model:
           report_to_send_frontend={}
           report={}
           for (model_key,model) in model_type.items():
+               logging.info(f'{model_key} is training ')
                model.fit(self.X_train, self.Y_train)
                y_pred=model.predict(self.X_test)
                accuracy= accuracy_score(y_pred,self.Y_test)

@@ -47,7 +47,7 @@ param_grid_all_Regressor = {
 param_grid_all_classification = {
     'LogisticRegression': {
         'penalty': ['l2', 'none', 'l1', 'elasticnet'],
-        'C': [0.01, 0.1, 1, 10, 100],
+        'C': [0.01, 0.1, 1, 10, 100,1000],
         'max_iter': [100, 200]
     },
     'Decision_Tree': {

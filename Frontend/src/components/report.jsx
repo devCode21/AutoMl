@@ -2,17 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"
 import { useNavigate } from "react-router";
 
-async function model_file(){
-        const res=await axios.get("")
-}
-
-
-
-function x_tarnsformed(){
-    
-
-}
-
 function Report({api}) {
   const [trained, setTrained] = useState("");
   const [Report_data, setReportData] = useState({});
@@ -26,6 +15,7 @@ function Report({api}) {
       setReportData(res.data);
       clearInterval(id); // stop once success
     }
+    
   }, 7000);
 
   // cleanup if component is removed
@@ -38,7 +28,17 @@ function Report({api}) {
         console.log("clicked")
         window.location.href = "http://127.0.0.1:5000/download_the_tuned_model";
     }
-  
+  const X_transformed=async(e)=>{
+        e.preventDefault()
+        console.log("clicked")
+        window.location.href = "http://127.0.0.1:5000/X_test_transformed";
+    }
+  const download_metrics=async(e)=>{
+        e.preventDefault()
+        console.log("clicked")
+        window.location.href = "http://127.0.0.1:5000/download_metrics";
+    }
+    
  
    
 
@@ -49,6 +49,7 @@ function Report({api}) {
      e.preventDefault()
         if(upload_csv==true){
           console.log("building")
+          navigate('/test_csv_data')
         }
         else if(form==true){
           navigate('/test_form_data')
@@ -82,17 +83,17 @@ function Report({api}) {
         )}
       </div>
 
-      {/* Downloads */}
-      {api==1 &&
+  
+      {(api==1 || localStorage.getItem('api')==1)&&
         <div className="h-40 flex-col">
          <div className="dwnload flex flex-col md:flex-row justify-between gap-4 mb-5">
         <button  onClick={model_download} className="px-5 py-2 rounded-lg bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
           Download Model
         </button>
-        <button className="px-5 py-2 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition">
-          Check Transformed Data (CSV)
+        <button onClick={download_metrics} className="px-5 py-2 rounded-lg bg-green-600 text-white font-medium hover:bg-green-700 transition">
+          Downlaod Report
         </button>
-        <button className="px-5 py-2 rounded-lg bg-purple-600 text-white font-medium hover:bg-purple-700 transition">
+        <button onClick={X_transformed} className="px-5 py-2 rounded-lg bg-purple-600 text-white font-medium hover:bg-purple-700 transition">
           Download X_transformed
         </button>
       </div>
@@ -106,7 +107,7 @@ function Report({api}) {
           Form Features
         </label>
         <button onClick={handle_train_button} className="px-6 py-2 rounded-lg bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition">
-          Train Model
+          Test Model
         </button>
       </div>
         

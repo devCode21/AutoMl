@@ -9,6 +9,7 @@ import DataInputSelector from './components/Testingpage.jsx'
 import Report from './components/report.jsx'
 import Homepage from './components/Homepage.jsx'
 import Csv_test from './components/csv_test.jsx'
+import RemoveUnwantedCols from './components/remove_unwanted_cols.jsx'
 
 let route=createBrowserRouter([
   {
@@ -33,6 +34,10 @@ let route=createBrowserRouter([
       {
         path:'/test_csv_data',
         element:<Csv_test/>
+      },
+      {
+        path:'/remove_cols_doeent_req',
+        element:<RemoveUnwantedCols/>
       }
 ])
 
