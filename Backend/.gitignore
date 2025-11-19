@@ -1,0 +1,29 @@
+
+# Ignore CSV, NPY, TXT files
+*.csv
+*.npy
+*.txt
+
+# Ignore logging folder
+logging/
+
+# Ignore Python virtual environment folder
+myenv/
+
+# Node modules (useful for Node projects)
+node_modules/
+
+# Ignore build artifacts (optional but common)
+dist/
+build/
+
+# Ignore environment files (recommended)
+.env
+.env.local
+
+# Ignore Docker artifact folders
+
+# Ignore OS-specific junk files
+.DS_Store
+Thu
+
