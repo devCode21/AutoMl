@@ -96,7 +96,7 @@ function RemoveUnwantedCols() {
         className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-8 w-full max-w-lg shadow-2xl"
       >
         <h2 className="text-2xl font-semibold text-white mb-6 text-center">
-          Select Columns to Keep
+          Select Columns to Keep (please remove cols like id date etc to get good accurcay)
         </h2>
         <div className="space-y-3 max-h-96 overflow-y-auto mb-6">
           {cols.map((col, idx) => (

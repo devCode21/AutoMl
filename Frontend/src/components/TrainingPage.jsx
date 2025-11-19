@@ -60,8 +60,7 @@ function TrainingPage() {
   const handleSubmit= (e)=>{
     e.preventDefault()
     if(!dataset || targetCol=="" ||typeOfModel==""){
-      console.log("enter all details")
-      return
+       alert('please enter all columns')
     }
     setsubmit(!submit)
   
