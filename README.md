@@ -74,9 +74,23 @@ In upcoming versions, support for **Unsupervised Learning** and **Neural Network
 
 
 
-## 📸 Screenshots (Optional)
+## 📸 Screenshots 
+<br>
 
-*Add screenshots of your frontend UI here (Home, Training, Reports, Prediction pages).*
+<img src="https://github.com/user-attachments/assets/9faa56d8-f334-41a0-853d-9f64aa97f837" width="700" alt="Home Page" />
+<img src="https://github.com/user-attachments/assets/77c10abe-a132-41d4-8d32-35445ca51cb5" width="700" alt="Training Page" />
+<img src="https://github.com/user-attachments/assets/2f2f9c19-81cb-4794-a9c6-7ce9776e7e3e" width="700" alt="Column Selection" />
+<img src="https://github.com/user-attachments/assets/0aae3dc0-9531-4ee2-b58d-6e22c43df7fd" width="700" alt="Report Page" />
+<img src="https://github.com/user-attachments/assets/077ed3bd-1dab-4467-be9d-a917cb4e5c73" width="700" alt="Form Testing" />
+<img src="https://github.com/user-attachments/assets/39411141-233b-4ae8-9dbf-c8a807e6664c" width="700" alt="CSV Testing" />
+
+
+
+
+
+
+
+
 
 ---
 
