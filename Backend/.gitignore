@@ -2,7 +2,6 @@
 # Ignore CSV, NPY, TXT files
 *.csv
 *.npy
-*.txt
 *.pkl
 *.json
 
