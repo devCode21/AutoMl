@@ -3,6 +3,8 @@
 *.csv
 *.npy
 *.txt
+*.pkl
+*.json
 
 # Ignore logging folder
 logging/
