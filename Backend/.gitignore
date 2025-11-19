@@ -4,6 +4,7 @@
 *.npy
 *.pkl
 *.json
+*.xsls
 
 # Ignore logging folder
 logging/
