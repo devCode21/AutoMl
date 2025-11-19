@@ -2,12 +2,14 @@ import React, { use, useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router";
 import Report from "./report";
+import {API_KEY} from "../../utlis";
 
 async function call_api(data,targetCol ,typeOfModel){
+  console.log("clicked")
   
     const formData = new FormData();
     formData.append('file', data)
-    let result=await axios.post(`http://localhost:5000/Data/${targetCol}/${typeOfModel}`,formData,{
+    let result=await axios.post(`${API_KEY}/Data/${targetCol}/${typeOfModel}`,formData,{
         headers: {
           'Content-Type': 'multipart/form-data',
         },

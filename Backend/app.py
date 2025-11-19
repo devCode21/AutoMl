@@ -13,7 +13,7 @@ from flask import session
 from src.logger import logging
 app=Flask(__name__)
 app.secret_key = 'supersecret123'  # Add a secret key for session management
-CORS(app , supports_credentials=True , origins=["http://localhost:5173"] ) #))
+CORS(app , supports_credentials=True , origins=["*"] ) #))
 
 
 # training -api
@@ -151,4 +151,4 @@ def download_files():
 
 
 if __name__=="__main__":
-   app.run(debug=True)
+   app.run(host="0.0.0.0" ,debug=True)

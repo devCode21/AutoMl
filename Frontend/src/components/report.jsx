@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios"
 import { useNavigate } from "react-router";
+import {API_KEY} from "../../utlis";
 
 function Report({api}) {
   const [trained, setTrained] = useState("");
@@ -10,7 +11,7 @@ function Report({api}) {
   const navigate=useNavigate()
   useEffect(() => {
   const id = setInterval(async () => {
-    let res = await axios.get("http://127.0.0.1:5000/metrics");
+    let res = await axios.get(`${API_KEY}/metrics`);
     if (res.status === 200) {
       setReportData(res.data);
       clearInterval(id); // stop once success
@@ -26,17 +27,17 @@ function Report({api}) {
   const model_download=async(e)=>{
         e.preventDefault()
         console.log("clicked")
-        window.location.href = "http://127.0.0.1:5000/download_the_tuned_model";
+        window.location.href = `${API_KEY}/download_the_tuned_model`;
     }
   const X_transformed=async(e)=>{
         e.preventDefault()
         console.log("clicked")
-        window.location.href = "http://127.0.0.1:5000/X_test_transformed";
+        window.location.href = `${API_KEY}/X_test_transformed`;
     }
   const download_metrics=async(e)=>{
         e.preventDefault()
         console.log("clicked")
-        window.location.href = "http://127.0.0.1:5000/download_metrics";
+        window.location.href = `${API_KEY}/download_metrics`;
     }
     
  

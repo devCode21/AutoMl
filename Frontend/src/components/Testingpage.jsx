@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
+import {API_KEY} from "../../utlis";
 
 function TestFormData() {
   const [features ,setfeatures]=useState({})
@@ -8,7 +9,7 @@ function TestFormData() {
 
   useEffect(()=>{
      let call_features=async()=>{
-       let data=await axios.get("http://127.0.0.1:5000/send_form_features")
+       let data=await axios.get(`${API_KEY}send_form_features`)
        setfeatures(data.data)
 
      }
@@ -24,7 +25,7 @@ function TestFormData() {
           }
       }
 
-      let api_Call=await axios.post("http://127.0.0.1:5000/predict_form_data" ,fet_val)
+      let api_Call=await axios.post(`${API_KEY}/predict_form_dat` ,fet_val)
       setPred(api_Call.data)
       console.log(api_Call.data)
   }

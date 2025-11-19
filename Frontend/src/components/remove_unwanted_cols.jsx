@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Report from "./report";
+import {API_KEY} from "../../utlis";
 
 function RemoveUnwantedCols() {
   const [cols, setCols] = useState([]);
@@ -41,7 +42,7 @@ function RemoveUnwantedCols() {
     const notselectedCols = cols.filter((col) => !selectedCols.includes(col));
 
     try {
-      const api = `http://localhost:5000/Predict_csv_file`;
+      const api = `${API_KEY}/Predict_csv_file`;
       setChange(1)
       const res = await axios.post(
             api,
